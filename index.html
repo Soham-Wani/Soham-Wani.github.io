@@ -1,41 +1,116 @@
 <!DOCTYPE html>
 <html lang='en:IN'>
-  <head>
-    <meta charset='utf-8'/>
-    <meta name='viewport' content='width=device-width, initial-scale=1'/>
-    <link rel='icon' type='image/jpg' href='#'/>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'/>
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel='icon' type='image/jpg' href='#' />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css' integrity='sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==' crossorigin='anonymous' referrerpolicy='no-referrer' />
     <title>Soham Wani</title>
     <style>
-      * {
-        font:normal normal 100% Montserrat;
-        text-rendering:optimizeLegibility;
-        -webkit-font-smoothing:antialiased;
-      }
-      #menu {
-        text-align:left;
-        color:#ffffff;
-        background:#0c0c46;
-        padding:0.5px;
-        position:fixed;
-        top:0px;
-        width:100%;
-        left:0px;
-        z-index:9;
-      }
-      #menu h1 {
-        font-size:25px;
-        font-weight:900;
-      }
+        * {
+            font: normal normal 100% Montserrat;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        .dshow {
+            display: block
+        }
+        .mshow {
+            display: none
+        }
+@media screen and (max-width:768px) {
+            .dshow {
+                display: none
+            }
+            .mshow {
+                display: block
+            }
+        }
+        #menu {
+            text-align: left;
+            color: #ffffff;
+            background: #0c0c46;
+            padding: 0.5px;
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            left: 0px;
+            z-index: 9;
+        }
+        #menu h1 {
+            font-size: 25px;
+            font-weight: 900;
+            padding: 5px;
+        }
+        #icons {
+            float: right;
+            font-size: 15px;
+            padding-top: 0px;
+        }
+        #icons a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+        i {
+            display: inline-block;
+            border-radius: 60px;
+            box-shadow: 0 0 0.75px #ffffff;
+            padding: 8px 10px;
+
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div id='menu'>
-      <h1>
-        Soham
-      </h1>
+        <h1>
+            &nbsp;&nbsp;Soham
+            <span id='icons'>
+                <a href='#intro'>
+                    <i class='fa-solid fa-user'>
+                    </i>
+                    <span class='dshow'>
+                        Intro
+                    </span>
+                </a>
+                &nbsp;
+                <a href='#skills'>
+                    <i class='fa-solid fa-bars-progress'>
+                    </i>
+                    <span class='dshow'>
+                        Skills
+                    </span>
+                </a>
+                &nbsp;
+                <a href='#projects'>
+                    <i class='fa-solid fa-house-laptop'>
+                    </i>
+                    <span class='dshow'>
+                        Projects
+                    </span>
+                </a>
+                &nbsp;
+                <a href='#social'>
+                    <i class='fa-solid fa-users'>
+                    </i>
+                    <span class='dshow'>
+                        Social
+                    </span>
+                </a>
+                &nbsp;
+                <a href='#contact'>
+                    <i class='fa-regular fa-address-card'>
+                    </i>
+                    <span class='dshow'>
+                        Contact
+                    </span>
+                </a>
+                &nbsp;&nbsp;
+            </span>
+        </h1>
     </div>
+    <div style='clear:both;height:64.44px'/>
     <script>
     </script>
-  </body>
+</body>
 </html>
