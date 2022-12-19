@@ -1,494 +1,309 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head>
-    <title>The Simplex Algorithm Developed by Donghua Chen</title>
-    <style>
-    input
-    {
-         font-size:medium;
-    }
-        .style1
-        {
-            width: 105px;
-        }
-    </style>
-</head>
-<script type="text/javascript">
-    var VN;
-    var CN;
-    var th = new Array();
-    var bv = new Array();
-    var zx;
-    var zy;
-    var step=0;
-    function initvalue() {
-        xx0.value = -2; xx1.value = -1;
-        x00.value = 0; x01.value = 5;
-        x10.value = 6; x11.value = 2;
-        x20.value = 1; x21.value = 1;
-        b0.value = 15;
-        b1.value = 24;
-        b2.value = 5;
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    <script>let input, button, greeting;
 
-    }
-    function initM() {
-        xx0.value = 2; xx1.value = 3;
-        x00.value = 0.5; x01.value = .25;
-        x10.value = 1; x11.value = 3;
-        x20.value = 1; x21.value = 1;
-        b0.value = 4;
-        b1.value = 20;
-        b2.value = 10;
-    }
-    function CreateOJ() {
-        // create objective function
-        var s;
-        var ROW;
-        var COL;
-        s = objecttype.options[objecttype.selectedIndex].text + " Z = ";
-        VN = nvar.value;
-        CN = ncon.value;
-        var i;
-        for (i = 0; i < VN; i++) {
-            value = "x" + (i + 1);
-            s += "<input type='text' id='xx" + i + "' size='4'/>" + "<input type='text' value='" + value + "' id='th" + i + "' size='3' />";
-            if (i != VN - 1) {
-                s += " + ";
-            }
-        }
-        of.innerHTML = s;
+function setup() {
+  // create canvas
+  createCanvas(0, 0);
 
-        var constring;
-        var temp = "";
-        for (j = 0; j < CN; j++) {
-            for (i = 0; i < VN; i++) {
-                temp += "<input type='text' id='x" + j + i + "' size='3'/><font> </font>" + "<font id='fo_" + i + "' > " + document.getElementById("th" + i).value + " </font>";
-                if (i != VN - 1) {
-                    temp += " + ";
-                }
-            }
-            temp += "<select id='equ" + j + "' >";
-            temp += "<option value='less' selected='selected'>&lt;=</option>";
-            temp += "<option value='larger' >&gt;=</option>";
-            temp += "<option value='equal'>=</option>";
-            temp += "</select><font> </font>";
-            temp += "<input type='text' id='b" + j + "' size='3' /><br/>";
-        }
-        constr.innerHTML = temp;
-    }
-  
-</script>
-<script type="text/javascript">
- var a=new Array();
- var b=new Array();
- var M = new Array();
- var row;
- var col;
- function begin() {
- 
-     a = new Array(4);
-     for (i = 0; i < a.length; i++) {
-         a[i] = new Array(6);
-     }
-     M = new Array(6);
-     b = new Array(4);
-    	row=4;
-    	col=6;
-    	a[0][0]=-2;a[0][1]=-3;a[0][2]=0;a[0][3]=0;a[0][4]=0;a[0][5]=0;
-    	a[1][0]=0.5;a[1][1]=0.25;a[1][2]=0;a[1][3]=0;a[1][4]=0;a[1][5]=0;
-    	a[2][0]=1;a[2][1]=3;a[2][2]=0;a[2][3]=-1;a[2][4]=1;a[2][5]=0;
-    	a[3][0]=1.0;a[3][1]=1;a[3][2]=0;a[3][3]=0;a[3][4]=0;a[3][5]=1;
-    	b[0]=0;b[1]=4;b[2]=20;b[3]=10;
-    	M[0] = 2; M[1] = 4; M[2] = 0; M[3] = -1; M[4] = 0; M[5] = 0; M[6] = 30;
-    	showtable();
-    	checkmax();
+  input1 = createInput();
+  input1.position(20, 65);
+  input1.value(5)
+  input2 = createInput();
+  input2.value(2)
+  input2.position(20, 105);
 
- }
- function solve() {
-         check();  
- }
+  button = createButton('submit');
+  button.position(input1.x + input1.width+20, 65);
+  button.mousePressed(greet);
 
- function showtable() {
-     display.innerHTML += NewTable();
- }
-function check()
-{
-    	
-    	var max=-1000.0;
-    	var  m=-100;
-    	var maxm=-1000.0;
-    	var mm=-1;
-    	var tz = -1;
-    	var i;
-    	for(i=0;i<M.length-1;i++){
-    		if(M[i]>maxm){
-    			maxm=M[i];
-    			mm=i;
-    		}
-    		if(M[i]!=0){
-    			tz=0;
-    		}
-    	}
+  greeting = createElement('h2', 'Rezolvarea problemelor de min/max cu metoda Simplex.<br>Realizat de Cunev S. Dmitri  -- https://github.com/DimitriCunev<br>Lect. univ. dr. Marius Spinu');
+  greeting.position(20, 155);
 
+  textAlign(CENTER);
+  textSize(50);
+}
 
-if (maxm <= 0 && maxm != -1000.0 && tz == 0) {
-    alert("Reach Optimal!");
-           display.innerHTML+= "Reach Optimal, We get the optimal solution";
-    		return "";
-    	}
-    	
-    	if(tz!=0)
-    	{
-    	for(i=0;i<M.length-1;i++){
-    			if(a[0][i]>max){
-    				m=i;
-    				max=a[0][i];
-    			}
-    		
-    	}
-if (max <= 0) {
-    alert("Reach Optimal!");
-    display.innerHTML+= "Reach Optimal, We get the optimal solution";
-      
-    		return "";
-    	}
-    	}else{
-    		m=mm;
-    	}
-        
-    	var vj=m;
-    	var vi=0;
-    	var INF=9e9;
-    	var test=INF;
-    	var minn=INF;
-    	var aa;
-    	for(i=1;i<row;i++){
-    		if(a[i][vj]==0)
-    			test=INF;
-    		else
-    		test=b[i]/a[i][vj];
-    		if(test<minn){
-    			vi=i;
-    			minn=test;
-    		}
-    	}
-    	bv[vi] = vj;
-if (minn == INF || vi == 0) {
-    message.innerHTML = "no solution";
-    		return;
-    	}
-        var mpt=a[vi][vj];
-    	for(j=0;j<col;j++){
-          var cc;    	 
-    		cc=a[vi][j]/mpt;
-    		a[vi][j]=cc ;
-    		
-    	}
-    	b[vi]=b[vi]/mpt;
-    	var mmp=0;
-    	mmp=M[vj];
-    	var mmj=0;
-    	mmj=a[0][vj];
-    	for(j=0;j<col;j++){
-    		a[0][j]-=a[vi][j]*mmj;
-    		M[j]-=a[vi][j]*mmp;
-    	//	System.out.println("M["+j+"] = "+M[j]+"-"+a[vi][j]+"*"+M[vj]+" = "+M[j]);
-    		if(j==col-1){
-    			 b[0]-=b[vi]*mmj;
-    	    	 M[M.length-1]-=b[vi]*mmp;
-    		}
-    	}
-    	
-    	for(i=1;i<row;i++){
-    		mpt=a[i][vj];
-    		if(i!=vi){
-    		for(j=0;j<col;j++){
-    			a[i][j]-=a[vi][j]*mpt;    
-    		}
-    		b[i]-=b[vi]*mpt;
-    		}
-    	}
-    	showtable();
-    	check();
-    }
+let x=0,y=0
+let ok
+function greet() {
     
-    function NewTable() {
-
-        var s = "<font><b>Step " + step + "</b></font><br/><table border='1' ><tr>";
-        step++;
-        var k;
-        for (i = 0; i < col; i++) {
-            s += "<td width='50'><b>" + th[i] + "</b></td>";
-            k = i;
-        }
-        s += "<td width='50'><b>" + th[k+1] + "</b></td>";
-        s += "<td width='50'><b>r.h.s</b></td>";
-        s += "<td width='50'><b>bv</b></td></tr>";
-        s += "<tr><td>M</td>";
-        for (i = 0; i < col+1; i++) {
-            s += "<td><input type='text' size='7' value='" + M[i] + "'/></td>";
-        }
-        s += "</tr>";
-        for (i = 0; i < row; i++) {
-            if (i == 0) {
-                s += "<td width='30'>1</td>";
-            } else {
-                s += "<td width='30' >0</td>";
-            }
-            for (j = 0; j < col; j++) {
-                s += "<td  ><input type='text' size='7' value='" + a[i][j] + "'/></td>"
-            }
-            s += "<td  ><input type='text' size='7' value='" + b[i] + "'/></td>";
-
-            for (as = 0; as < col; as++) {
-                var cd=-1;var cc = 0;
-                if (a[i][as] == 1) {
-                    for (bs = 1; bs < row; bs++) {
-                        if (a[bs][as] == 0) {
-                            cc++;
-                        }
-                    }
-                    if (cc == row - 2) {
-                        //found the base
-                        s += "<td ><input type='text' size='7' value='" + th[as+1] + "=" + b[i] + "'/></td>";
-                        break;
-                    }
-                }
-            }
-            s += "</tr>";
-
-           
-        }
-        s += "</table>";
-
-        return s;
+    x = parseInt(input1.value())
+    y = parseInt(input2.value())
+    if(!isNaN(x)&&!isNaN(y)){
+        input1.remove();input2.remove();greeting.remove();button.remove()
+        ok = createButton('start')
+        ok.mousePressed(()=>{solvefor()});
+        start()
+    } else {
+        // greeting.html('Rezolvarea problemelor de min/max cu metoda Simplex')
     }
 
-    function InitTable() {
-        step = 0;
-        display.innerHTML = "";
-        var s;
-        var t = new Array();
-        var Count = parseInt(VN);
-        //obtain total counts of the entire caculation table
-        for (i = 0; i < CN; i++) {
-            s = document.getElementById("equ" + i).options[document.getElementById("equ" + i).selectedIndex].text;
-            if (s == "<=") {
-                Count++;
-            }
-            if (s == ">=") {
-                Count = Count + 2;
-            }
-            if (s == "=") {
-                Count++;
-            }
+}
+
+let inputs = []
+let cos = []
+let cbs = []
+let pos = []
+let ois = []
+let ress = []
+let fos
+let os = {x:100,y:100}
+let str = ''
+function start(){
+    let ocon = console.log
+    console.log = (...args)=>{
+        str+='<br>'
+        args.forEach(e=>{
+            str+='<br>'+e
+        })
+        greeting.html(str)
+        ocon(...args)
+    }
+    greeting = createElement('h5', '');
+    greeting.position(360, 25);
+    for (let j = 0; j < y; j++) {
+        inputs.push([])
+        for (let i = 0; i < x; i++) {
+            inputs[inputs.length-1].push(createInput().size(30,30).position(os.x+i*30,os.y+j*30))
         }
-        Count = Count + 1; //add z var
-        //simplify the objective function
-        t[0] = new Array(Count);
-        var tt;
-        t[0][0] = 1;
-        var j;
-        for (j = 1; j <= VN; j++) {
-
-            // t[0][j] = -document.getElementById("X" + parseInt(jjj)).value;
-            tt = -parseFloat(document.getElementById('xx' + (j - 1)).value);
-            t[0][j] = tt;
-
-        }
-        for (k = j; k < Count; k++) {
-            t[0][k] = 0;
-        }
-
-        //handle with table header
-        th[0] = "z";
-        for (k = 1; k <= VN; k++) {
-            var xs = 0;
-            xs = k - 1;
-            th[k] = document.getElementById("th" + xs).value;
-
-        }
-
-        // handle the contrainsts
-        var index;
-        index = 1;
-        for (i = 1; i <= CN; i++) {
-            t[i] = new Array(Count);
-            t[i][0] = 0;
-            for (j = 1; j < Count; j++) {
-
-                if (j <= VN) {
-                    var temp;
-                    temp = document.getElementById("x" + (i - 1) + (j - 1)).value;
-                    t[i][j] = parseFloat(temp);
-                }
-
-                if (j > VN) {
-                    t[i][j] = 0;
-
-                }
-
-            }
-            var bb = "";
-            var d = 0;
-            bv = new Array(parseFloat(CN));
-            bb = document.getElementById("equ" + (i - 1)).options[document.getElementById("equ" + (i - 1)).selectedIndex].text;
-            aa = objecttype.options[objecttype.selectedIndex].text
-            if (bb == "<=") {
-                d = parseInt(VN) + parseInt(index);
-                t[i][d] = 1;
-                th[d] = "s" + i;
-                 bv[index] = d;
-                index++;
-
-            }
-            if (bb == ">=") {
-                d = parseInt(VN) + parseInt(index);
-                th[d] = "e" + i;
-                t[i][d] = -1;
-                index++;
-                d = parseInt(VN) + parseInt(index);
-                th[d] = "a" + i;
-                t[i][d] = 1;
-                if (aa == "MAX") {
-                    t[0][d] = "M";
-                } else {
-                t[0][d] = "-M";
-                }
-                bv[index] = d;
-                index++;
-            }
-            if (bb == "=") {
-                d = parseInt(VN) + parseInt(index);
-                th[d] = "a" + i;
-                t[i][d] = 1;
-                if (aa == "MAX") {
-                    t[0][d] = "M";
-                } else {
-                    t[0][d] = "-M";
-                }
-               bv[index] = d;
-                index++;
-            }
-
-
-
-        }
-        //basic var rhs
-        var rhs = new Array(parseInt(CN) + 1);
-        rhs[0] = 0;
-        for (i = 1; i < rhs.length; i++) {
-            rhs[i] = parseFloat(document.getElementById("b" + (i - 1)).value);
-        }
-
-        ////////////////////////////////////////////////////////
-        a = new Array(parseFloat(CN) + 1);
-        for (i = 0; i < a.length; i++) {
-            a[i] = new Array(Count - 1);
-        }
-
-
-        b = new Array(parseFloat(CN) + 1);
         
-        row = parseFloat(CN) + 1;
-        col = Count - 1;
-        M = new Array(col+1);
-        //////////////////////////////////////////////
-        for (i = 0; i < row; i++) {
-            for (j = 0; j < col; j++) {
-                a[i][j] = t[i][j + 1];
-            }
-            b[i] = rhs[i];
+    }
+
+    for (let i = 0; i < x; i++) {
+        cos.push(createInput().size(30,30).position(os.x+i*30,os.y-30).attribute('placeholder', 'co'))
+    }
+    for (let i = 0; i < y; i++) {
+        cbs.push(createInput().size(30,30).position(os.x-60,os.y+i*30).attribute('placeholder', 'cb'))
+    }
+    for (let i = 0; i < y; i++) {
+        pos.push(createInput().size(30,30).position(os.x-30,os.y+i*30).attribute('placeholder', 'po'))
+    }
+
+    for (let i = 0; i < y; i++) {
+        ois.push(createInput().size(30,30).position(os.x+30*x,os.y+i*30).attribute('placeholder', 'oi').attribute('disabled', 'true'))
+    }
+    for (let i = 0; i < x; i++) {
+        ress.push(createInput().size(30,30).position(os.x+i*30,os.y+y*30).attribute('placeholder', 'r').attribute('disabled', 'true'))
+    }
+    fos = createInput().size(30,30).position(os.x-30,os.y+y*30).attribute('placeholder', 'fx').attribute('disabled', 'true')
+    
+}
+let base = [0,0]
+function solvefor(){
+   
+        let m = []
+        let co = []
+        let cb = []
+        let po = []
+        inputs.forEach(e=>{
+            m.push([])
+            e.forEach(j=>{
+                m[m.length-1].push(parseFloat(j.value()))
+            })
+        })
+
+        cos.forEach(e=>{
+            co.push(parseFloat(e.value()))
+        })
+        cbs.forEach(e=>{
+            cb.push(parseFloat(e.value()))
+        })
+        pos.forEach(e=>{
+            po.push(parseFloat(e.value()))
+        })
+        console.log(m)
+        console.log(co)
+        console.log(cb)
+        console.log(po)
+        simplex(m,cb,po,co,1,[],[],[])
+    
+}
+
+function showStep(oss,arr,cb,po,co,res,oix,fox){
+    
+    let inputs = []
+    let cos = []
+    let cbs = []
+    let pos = []
+    let ois = []
+    let ress = []
+    let fos
+    for (let j = 0; j < y; j++) {
+        inputs.push([])
+        for (let i = 0; i < x; i++) {
+            inputs[inputs.length-1].push(createInput().size(30,30).position(oss.x+i*30,oss.y+j*30).value(arr[j][i]))
         }
-        //////////////////////////////////////////
-        var te;
-        for(i=0;i<col+1;i++)
-        M[i]=0;
-        for (j = 0; j < col; j++) {
-            if (a[0][j] == "M"||a[0][j]=="-M") {
-                for (i = 0; i < row; i++) {
-                    if (parseInt(a[i][j]) == 1) {
-                        for (k = 0; k < col; k++) {
-                            if (aa == "MAX") {
-                                M[k] -= a[i][k];
-                            } else {
-                                M[k] += a[i][k];
-                            }
-                            
-                          
-                        }
-                        M[j] = 0;
-                        a[0][j] = 0;
-                        if (aa == "MAX") {
-                            M[M.length - 1] -= b[i];
-                        } else {
-                            M[M.length - 1] += b[i];
-                        }
-                       
-                       
-                        break;
-                    }
+        
+    }
+
+    for (let i = 0; i < x; i++) {
+        cos.push(createInput().size(30,30).position(oss.x+i*30,os.y-30).attribute('placeholder', 'co').attribute('disabled', 'true').value(co[i]))
+    }
+    for (let i = 0; i < y; i++) {
+        cbs.push(createInput().size(30,30).position(oss.x-60,oss.y+i*30).attribute('placeholder', 'cb').attribute('disabled', 'true').value(cb[i]))
+    }
+    for (let i = 0; i < y; i++) {
+        pos.push(createInput().size(30,30).position(oss.x-30,oss.y+i*30).attribute('placeholder', 'po').attribute('disabled', 'true').value(po[i]))
+    }
+
+    for (let i = 0; i < y; i++) {
+        ois.push(createInput().size(30,30).position(oss.x+30*x,oss.y+i*30).attribute('placeholder', 'oi').attribute('disabled', 'true').value(oix[i]))
+    }
+    for (let i = 0; i < x; i++) {
+        ress.push(createInput().size(30,30).position(oss.x+i*30,oss.y+y*30).attribute('placeholder', 'r').attribute('disabled', 'true').value(res[i]))
+    }
+    fos = createInput().size(30,30).position(oss.x-30,oss.y+y*30).attribute('placeholder', 'fx').attribute('disabled', 'true').value(fox)
+}</script>
+    <script>
+
+
+//----------------Simplex Solver by Cunev S.Dmitri----------------
+// Table solving reproduction
+
+let transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+
+// let cb = [0,0]
+// let po = [10,8]
+// let co = [2,-1,-3,0,0]
+// let arr = [
+//     [1,1,2,1,0],
+//     [3,-1,2,0,1]
+// ]
+// let base = [4,5]
+function simplex(arr,cb,po,co,n,ress,oix,fox){
+    
+        
+    
+    console.log(`\n\n====================Iteration ${n}====================`)
+    let res = []
+
+
+    let tarr = []
+    let oi = []
+    arr.forEach((r,j)=>{
+        tarr.push([])
+        r.forEach(e=>{
+            tarr[tarr.length-1].push(e*cb[j])
+        })
+    })
+    tarr = transpose(tarr)
+    tarr.forEach((e,i)=>{
+        let sum = 0
+        e.forEach(el=>{
+            sum+=el
+        })
+        sum=sum-co[i]
+        res.push(sum)
+    })
+    let fxo = 0
+    po.forEach((e,i)=>{
+        fxo+=e*cb[i]
+    })
+
+    console.log(`fxo: ${fxo}`)
+    console.log(`res: ${res}`)
+
+    let contin = false;
+    let max = 0
+    let maxindex = 0
+    res.forEach((e,i)=>{
+        if(e>0){
+            contin = true
+            if(e>max) {max = e;maxindex = i}
+        }
+    })
+    if(contin){
+        console.log(`Found positive res, continuing at index ${maxindex+1} with value ${max}; \nCalculating Oi`)
+        let arrt = transpose(arr)
+        let maxrow = arrt[maxindex]
+        arrt[maxindex].forEach((e,i)=>{if(e===0){console.log('Division by 0, something went wrong')} else {oi.push(po[i]/e)}})
+        let mino = Infinity;
+        let minoi = -1
+        oi.forEach((e,i)=>{
+            if(e>0){
+                if(mino>e){
+                    mino = e
+                    minoi = i
                 }
             }
+        })
+        console.log(oi)
+        if(minoi!=-1){
+            console.log(`Found smallest positive oi, ${mino} at index ${minoi+1}`)
+            console.log(`\n> The next pivot would be ${arr[minoi][maxindex]} at [${minoi+1},${maxindex+1}]`)
+            console.log(`\n> Reducing row [${maxrow}] with pivot at index ${minoi+1}`)
+            let pivot = arr[minoi][maxindex]
+            let pivotp = {y:minoi,x:maxindex}
+            lpivot = pivotp
+            let rarr = []
+            let opo = []
+            maxrow.forEach((r,i)=>{
+                if(i!=minoi){
+                    rarr.push([])
+                    let deltaval = -(r/pivot)
+                    console.log(`<OP> Adding L${pivotp.y+1}*${deltaval} to ${i+1}`)
+                    opo.push(po[i]+po[pivotp.y]*deltaval)
+                    arr[pivotp.y].forEach((e,j)=>{
+                        rarr[rarr.length-1].push(e*deltaval+arr[i][j])
+                    })
+                } else {
+                    rarr.push([])
+                    opo.push(po[i]*(1/arr[minoi][maxindex]))
+                    arr[pivotp.y].forEach((e,j)=>{
+                        rarr[rarr.length-1].push(e*(1/arr[minoi][maxindex]))
+                    })
+                }
+                
+            })
+    
+            console.log(`<OP> Multiplying line ${minoi+1} by 1/${arr[minoi][maxindex]}`)
+    
+            console.log('\n\n')
+            console.log(rarr)
+            console.log(`New PO = ${opo}`)
+            showStep({x:100,y:((y+2)*30)*(n+1)},arr,cb,po,co,res,oi,fxo)
+            console.log(`\n<INSERT> CO: ${co[pivotp.x]} to Cb index ${pivotp.y}`)
+            base[pivotp.y] = pivotp.x+1
+            cb[pivotp.y] = co[pivotp.x]
+            console.log(cb)
+
+            console.log('Repeating algorithm, next path ->')
+            
+            simplex(rarr,cb,opo,co,n+1,res,oi,fxo)
+            
+            // 
+    
+        } else {
+            console.log(`No positives found, aborting.`)
+            showStep({x:100,y:((y+2)*30)*(n+1)},arr,cb,po,co,res,oi,fxo)
         }
+    } else {
+        console.log('\n\n[SUCCESS] Stopped algorithm, found solution.')
+        console.log(`>Po: ${po}`)
+        console.log(`>Cb: ${cb}`)
+        // console.log(`With main variables ${base}`)
+        let optisol = []
+        co.forEach((e,i)=>{
+            optisol.push(0)
+        })
+        base.forEach((e,i)=>{
+            optisol[e-1] = po[i]
+        })
+        // console.log(`x.opt = `,optisol)
+        showStep({x:100,y:((y+2)*30)*(n+1)},arr,cb,po,co,res,oi,fxo)
 
-        showtable();
     }
-</script>
-<body background="c.jpg" >
-    <br />
-    <table style="width: 107%;">
-        <tr>
-            <td class="style1">
-<img width="100" src="bjlogo.jpg" /></td>
-            <td>
-                <h1>The Simplex Algorithm &amp; Big M Method Program</h1>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-            </td>
-            <td>
-                <div>Developer: Donghua Chen&nbsp;<br />
-&nbsp;<br />
-                    </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                &nbsp;</td>
-            <td>
-                <hr />
-<font> Objective Function Type:&nbsp;&nbsp;&nbsp; 
-    </font><select id="objecttype" name="D1" >
-<option value="MAX" >MAX</option>
-<option value="MIN" selected="selected">MIN</option>
-</select><br />
-                <br />
-<font>The Number of Variances :&nbsp; &nbsp; </font><input type='text' id='nvar' 
-                    style="width: 163px" /><br />
-                <br />
-<font>The Number of Constrains: </font>
-&nbsp;&nbsp;
-<input type='text' id='ncon' /><br />
-                <br />
-&nbsp;<input type="button" value="CreateTable" onclick="CreateOJ()" />&nbsp;&nbsp; <input type="button" value="Simple Example" onclick="initvalue()" />&nbsp;&nbsp;
-<input type="button" value="BigM Example" onclick="initM()" />
-            </td>
-        </tr>
-    </table>
-<hr /> 
-<div><b>Objective Function:</b></div>
-<div id="of" align="center" >
-
-</div>
-<div><b>Subject TO:</b></div>
-<div id="constr" align="center"> </div>
-
-<hr />
-<input type="button" value="InitTable" onclick="InitTable()"  id="beginbutton"/>
-<input type="button" value="Do" onclick="solve()" id="bd" />
-<div id="display" />
-<div id="message" />
-</body>
+   
+}
+// simplex(arr,cb,po,co,1)</script>
+    <style>
+    
+    </style>
+  </head>
+  <body>
+    <main>
+    </main>
+  </body>
 </html>
