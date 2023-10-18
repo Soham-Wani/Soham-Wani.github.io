@@ -54,6 +54,23 @@
             text-align: center;
         }
 
+        .content>div {
+            padding: 1vh 1vw 1vh 1vw;
+        }
+
+        .social a {
+            font-size: 5vh;
+            text-decoration: none !important;
+            transition: all ease 0.25s;
+            letter-spacing: 0.5vw;
+        }
+
+        .social a:hover {
+            color: #ffffff !important;
+            opacity: 90%;
+            font-size: 6vh;
+        }
+
         @media only screen and (max-width: 768px) {
 
             .left,
@@ -73,13 +90,23 @@
                 text-align: center;
             }
 
-            #section-3 .content>div {
+            .content>div {
                 width: 80vw !important;
+            }
+
+            #section-3,
+            #section-4 {
+                height: 100% !important;
+                padding: 10vh 0 10vh 0;
+            }
+
+            #section-4 .content>div p:nth-of-type(2) {
+                text-align: justify !important;
             }
         }
 
         #top-bar {
-            position: absolute;
+            position: fixed;
             padding: 6vh 4vw 6vh 4vw;
             left: 0;
             top: 0;
@@ -98,6 +125,7 @@
             text-decoration: none !important;
             transition: all ease 0.25s;
             letter-spacing: 0.5vw;
+            color: #ffffff;
         }
 
         #top-bar a:hover {
@@ -194,7 +222,8 @@
         #section-3 .content img {
             height: 15vh;
             border-radius: 50%;
-            margin-bottom: 1vh;
+            margin-bottom: 2vh;
+            margin-top: 2vh;
         }
 
         #section-3 h3 {
@@ -215,6 +244,7 @@
             font-size: 2vh;
             font-weight: 500;
             margin-bottom: 0;
+            padding: 0 1vw;
         }
 
         #section-3 .content>div p:nth-of-type(2) {
@@ -223,6 +253,105 @@
             font-size: 1.8vh;
             font-weight: 300;
             margin-bottom: 0.8vh;
+            padding: 0 1vw;
+        }
+
+        #section-4 {
+            height: 100vh;
+            width: 100vw;
+            background: #0c0c46;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #section-4>h2:nth-child(1) {
+            color: #ffffff;
+            font-size: 6vh;
+            font-weight: bold;
+            margin-bottom: 2vh;
+        }
+
+        #section-4 .content>div {
+            width: 20vw;
+            border-radius: 7px;
+            background: #0c0c66;
+            padding: 1vw;
+            margin: 1vw;
+        }
+
+        #section-4 .content img {
+            height: 15vh;
+            width: 15vh;
+            border-radius: 50%;
+            margin-bottom: 2vh;
+            margin-top: 2vh;
+            object-fit: cover;
+            object-position: 0 0;
+        }
+
+        #section-4 h3 {
+            color: #ffffff;
+            font-size: 2.5vh;
+            font-weight: bolder;
+            letter-spacing: 0.17vw;
+        }
+
+        #section-4 .outer {
+            margin-top: 1vh;
+            padding: 1vh 0 1.5vh 0;
+        }
+
+        #section-4 .content>div p:nth-of-type(1) {
+            margin-top: 0.8vh;
+            color: #ffffff;
+            font-size: 2vh;
+            font-weight: bold;
+            margin-bottom: 0;
+            padding: 0 1vw;
+        }
+
+        #section-4 .content>div p:nth-of-type(2) {
+            margin-top: 0.8vh;
+            color: #b8b8b8;
+            font-size: 1.8vh;
+            font-weight: 300;
+            margin-bottom: 0.8vh;
+            padding: 0 1vw;
+        }
+
+        #section-5 {
+            height: 100vh;
+            width: 100vw;
+            background: #0c0c66;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #section-5>h2:nth-child(1) {
+            color: #ffffff;
+            font-size: 6vh;
+            font-weight: bold;
+            margin-bottom: 2vh;
+        }
+
+        #bottom-bar {
+            position: absolute;
+            padding: 0.5vh;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            font-size: 1vh;
+            color: white;
+            font-weight: 100;
+            z-index: 5;
+            background: #0c0c46;
+            text-align: center;
         }
     </style>
 </head>
@@ -233,45 +362,37 @@
             Soham Wani
         </h1>
         <span class="right">
-            <a style="color:#0000ff" title="Blog" href="https://usualqueries.blogspot.com" target="blank">
-                <i class="fa-solid fa-globe"></i>
+            <a title="Up" href="#section-1">
+                <i class="fa-solid fa-house"></i>
             </a>
-            <a style="color:#ff0000" title="YouTube" href="https://youtube.com/spacexplore" target="blank">
-                <i class="fab fa-youtube"></i>
+            <a title="About" href="#section-2">
+                <i class="fa-solid fa-user"></i>
             </a>
-            <a style="color:#000000" title="GitHub" href="https://github.com/Soham-Wani" target="blank">
-                <i class="fab fa-github"></i>
+            <a title="Education" href="#section-3">
+                <i class="fa-solid fa-graduation-cap"></i>
             </a>
-            <a style="color:#7289d9" title="Discord" href="https://discordapp.com/users/912297357339660309"
-                target="blank">
-                <i class="fa-brands fa-discord"></i>
+            <a title="Projects" href="#section-4">
+                <i class="fa-solid fa-list-check"></i>
             </a>
-            <a style="color:#ff4500" title="Reddit" href="https://www.reddit.com/user/Pseudonymous123" target="blank">
-                <i class="fa-brands fa-reddit"></i>
-            </a>
-            <a style="color:#0077b5" title="LinkedIn" href="https://www.linkedin.com/in/soham-wani-b0726a262/"
-                target="blank">
-                <i class="fa-brands fa-linkedin"></i>
-            </a>
-            <a style="color:#1db954" title="Pixabay" href="https://pixabay.com/users/sohamwani-20539330/"
-                target="blank">
-                <i class="fa fa-image"></i>
+            <a title="Contact" href="#section-5">
+                <i class="fa-solid fa-comments"></i>
             </a>
         </span>
     </div>
     <div id="section-1">
         <h2>Hello, I'm <span>Soham Wani</span></h2>
         <h2><span class="txt-rotate" data-period="2000"
-                data-rotate='[ "Student", "Programming Enthusiast", "Passionate Content Writer", "Curios Learner", "An Astronomy Fan" ]'>A
+                data-rotate='[ "Student", "Programming Enthusiast", "Passionate Content Writer", "Curious Learner", "Astronomy Fan", "AKA Pseudonymous123" ]'>A
                 student</span></h2>
     </div>
     <div id="section-2">
         <h2>A few words about myself...</h2>
-        <p>As a student, I've honed essential skills like time management, public speaking, dedication, and
+        <p>As a student, I've honed essential skills like time management, problem solving, dedication, and
             critical thinking, while also creating unforgettable memories.</p>
         <p>Currently, I am studying full time at
             Gati Shakti Vishwavidyalaya while being a remote learner at IIT Madras.</p>
-        <p>Apart from academics, you can find me doing stuff like coding, learning new stuff, and spending time with family.</p>
+        <p>Apart from academics, you can find me doing stuff like coding, learning new stuff, and spending time with
+            family.</p>
     </div>
     <div id="section-3">
         <h2>Education</h2>
@@ -294,6 +415,83 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="section-4">
+        <h2>Recent Works / Experiences</h2>
+        <div class="content">
+            <div>
+                <img src="https://upload.wikimedia.org/wikipedia/hi/7/7b/Indian_Railways_logo.png" />
+                <h3>Internship Trainee</h3>
+                <div class="outer">
+                    <p>Interned at Indian Railways Loco Workshop, Parel</p>
+                    <p>Enriched railway engineering knowledge and practical exposure and skills in areas like narrow
+                        gauge loco, FIAT bogies, operation of locos, overhauling of locomotives, coaches, bogies and
+                        manufacturing of various parts.</p>
+                </div>
+            </div>
+            <div>
+                <img
+                    src="https://ondemand.bannerbear.com/signedurl/5kBNAm9EpN1VKXb4Yo/image.jpg?modifications=W3sibmFtZSI6InJlcG8iLCJ0ZXh0IjoiU29oYW0tV2FuaSAvICpRUi1IdW50LVNjYW5uZXIqIn0seyJuYW1lIjoiZGVzYyIsInRleHQiOiJDdXN0b20gUVIgY29kZSBzY2FubmVyIHRvIG1ha2UgUVIgaHVudHMgcG9zc2libGUuIn0seyJuYW1lIjoiYXZhdGFyNSIsImhpZGUiOnRydWV9LHsibmFtZSI6ImF2YXRhcjQiLCJoaWRlIjp0cnVlfSx7Im5hbWUiOiJhdmF0YXIzIiwiaGlkZSI6dHJ1ZX0seyJuYW1lIjoiYXZhdGFyMiIsImhpZGUiOnRydWV9LHsibmFtZSI6ImF2YXRhcjEiLCJpbWFnZV91cmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvNjg4ODU1MjY_dj00In0seyJuYW1lIjoiY29udHJpYnV0b3JzIiwidGV4dCI6IlNvaGFtLVdhbmkifSx7Im5hbWUiOiJzdGFycyIsInRleHQiOiIwIn1d&s=871b477fc2efb9dd0d1daf28104ea0e4b52fbece51549bd5b0ab4e6e7707be1a" />
+                <h3>QR Hunt Scanner</h3>
+                <div class="outer">
+                    <p>Made a custom QR code scanner to make QR hunts possible</p>
+                    <p>Learnt use of Firebase, enhanced debugging skills, developed resourcefulness, brushed up web dev
+                        basics and gained confidence to tackle problems.</p>
+                </div>
+            </div>
+            <div>
+                <img src="https://i.ibb.co/BNhw3VD/Logo-Usual-Queries-2021-07-06.png" />
+                <h3>Usual Queries</h3>
+                <div class="outer">
+                    <p>Created and managed a 300+ posts blog for 2+ years with 50k+ views</p>
+                    <p>Self-taught web development basics, mastered content writing and editing, acquired audience
+                        management skills, and deepened knowledge in various topics. Above all, learned the value of
+                        persistence and not giving up.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="section-5">
+        <h2>Connect</h2>
+        <div class="content">
+            <span class="social">
+                <a style="color:#000000" title="GitHub" href="https://github.com/Soham-Wani" target="blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a style="color:#0077b5" title="LinkedIn" href="https://www.linkedin.com/in/soham-wani-b0726a262/"
+                    target="blank">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a style="color:#7289d9" title="Discord" href="https://discordapp.com/users/912297357339660309"
+                    target="blank">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a style="color:#ff4500" title="Reddit" href="https://www.reddit.com/user/Pseudonymous123"
+                    target="blank">
+                    <i class="fa-brands fa-reddit-alien"></i>
+                </a>
+                <a style="color:#ff5722" title="Blogger" href="https://www.blogger.com/profile/14703622455073552485"
+                    target="blank">
+                    <i class="fa-brands fa-blogger-b"></i>
+                </a>
+                <a style="color:#ff0000" title="YouTube" href="https://youtube.com/spacexplore" target="blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a style="color:#1db954" title="Pixabay" href="https://pixabay.com/users/sohamwani-20539330/"
+                    target="blank">
+                    <i class="fa fa-image"></i>
+                </a>
+                <a style="color:#000000" title="CodePen" href="https://codepen.io/Pseudonymous123/">
+                    <i class="fa-brands fa-codepen"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div id="bottom-bar">
+        Note: I am not on any other social media except for those mentioned here. I am not even on Instagram, Quora,
+        etc. Do not fall prey to impersonation. Legal: All the logos, images and names are owned by the respective
+        owners. I do not intend to infringe any copyright. Contact me on mail and I will take down your content from the
+        site.
     </div>
     <script>
         // Typewriter effect (Source: https://codepen.io/CheeseTurtle/pen/AYJYqE)
