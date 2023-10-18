@@ -11,11 +11,12 @@
     <title>Soham Wani</title>
     <style>
         @import url("https://fonts.googleapis.com/css?family=Montserrat");
+        @import url("https://fonts.googleapis.com/css?family=League+Spartan");
 
         body {
             overflow-x: hidden;
             background-color: white;
-            font-family: "Montserrat", sans-serif;
+            font-family: "Montserrat", Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -33,6 +34,7 @@
             text-align: inherit;
             text-transform: none;
             text-decoration: none;
+            font-family: "League Spartan", Arial, sans-serif;
         }
 
 
@@ -50,6 +52,30 @@
             justify-content: center;
             align-items: top;
             text-align: center;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            .left,
+            .right {
+                float: none;
+            }
+
+            .left {
+                margin-bottom: 1vh;
+            }
+
+            .content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            #section-3 .content>div {
+                width: 80vw !important;
+            }
         }
 
         #top-bar {
@@ -79,34 +105,10 @@
             font-size: 3.2vh;
         }
 
-        @media only screen and (max-width: 768px) {
-
-            .left,
-            .right {
-                float: none;
-            }
-
-            .left {
-                margin-bottom: 1vh;
-            }
-
-            .content {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-
-            #section-2 .content>div {
-                width: 80vw !important;
-            }
-        }
-
         #section-1 {
             height: 100vh;
             width: 90vw;
-            background: #0c0c46;
+            background: #0c0c66;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -138,7 +140,7 @@
         #section-2 {
             height: 100vh;
             width: 100vw;
-            background: #0c0c66;
+            background: #0c0c46;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -148,12 +150,40 @@
 
         #section-2>h2:nth-child(1) {
             color: #ffffff;
+            font-size: 7vh;
+            font-weight: bold;
+            width: 85vw;
+            text-align: left;
+        }
+
+        #section-2 p {
+            color: #aaaaaa;
+            font-size: 3vh;
+            font-weight: normal;
+            width: 85vw;
+            text-align: left;
+            margin-bottom: 0;
+        }
+
+        #section-3 {
+            height: 100vh;
+            width: 100vw;
+            background: #0c0c66;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #section-3>h2:nth-child(1) {
+            color: #ffffff;
             font-size: 6vh;
             font-weight: bold;
             margin-bottom: 2vh;
         }
 
-        #section-2 .content>div {
+        #section-3 .content>div {
             width: 30vw;
             border-radius: 7px;
             background: #0c0c46;
@@ -161,25 +191,25 @@
             margin: 1vw;
         }
 
-        #section-2 .content img {
+        #section-3 .content img {
             height: 15vh;
             border-radius: 50%;
             margin-bottom: 1vh;
         }
 
-        #section-2 h3 {
+        #section-3 h3 {
             color: #ffffff;
             font-size: 2.5vh;
             font-weight: bolder;
             letter-spacing: 0.17vw;
         }
 
-        #section-2 .outer {
+        #section-3 .outer {
             margin-top: 1vh;
             padding: 1vh 0 1.5vh 0;
         }
 
-        #section-2 .content>div p:nth-of-type(1) {
+        #section-3 .content>div p:nth-of-type(1) {
             margin-top: 0.8vh;
             color: #ebebff;
             font-size: 2vh;
@@ -187,23 +217,12 @@
             margin-bottom: 0;
         }
 
-        #section-2 .content>div p:nth-of-type(2) {
+        #section-3 .content>div p:nth-of-type(2) {
             margin-top: 0.8vh;
             color: #ffffcc;
             font-size: 1.8vh;
             font-weight: 300;
             margin-bottom: 0.8vh;
-        }
-
-        #section-3 {
-            height: 100vh;
-            width: 100vw;
-            background: #0c0c46;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
         }
     </style>
 </head>
@@ -242,9 +261,19 @@
     </div>
     <div id="section-1">
         <h2>Hello, I'm <span>Soham Wani</span></h2>
-        <h2>A student with endless curiosity</h2>
+        <h2><span class="txt-rotate" data-period="2000"
+                data-rotate='[ "Student", "Programming Enthusiast", "Passionate Content Writer", "Curios Learner", "An Astronomy Fan" ]'>A
+                student</span></h2>
     </div>
     <div id="section-2">
+        <h2>A few words about myself...</h2>
+        <p>As a student, I've honed essential skills like time management, public speaking, dedication, and
+            critical thinking, while also creating unforgettable memories.</p>
+        <p>Currently, I am studying full time at
+            Gati Shakti Vishwavidyalaya while being a remote learner at IIT Madras.</p>
+        <p>Apart from academics, you can find me doing stuff like coding, learning new stuff, and spending time with family.</p>
+    </div>
+    <div id="section-3">
         <h2>Education</h2>
         <div class="content">
             <div>
@@ -266,9 +295,56 @@
             </div>
         </div>
     </div>
-    <div id="section-3">
-
-    </div>
+    <script>
+        // Typewriter effect (Source: https://codepen.io/CheeseTurtle/pen/AYJYqE)
+        var TxtRotate = function (el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+        TxtRotate.prototype.tick = function () {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+            var that = this;
+            var delta = 300 - Math.random() * 100;
+            if (this.isDeleting) { delta /= 2; }
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+            setTimeout(function () {
+                that.tick();
+            }, delta);
+        };
+        window.onload = function () {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+        };
+    </script>
 </body>
 
 </html>
