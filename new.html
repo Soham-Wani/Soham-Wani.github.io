@@ -64,6 +64,7 @@
             z-index: 5;
             text-shadow: 0 0 50px black;
             background: linear-gradient(to bottom, rgba(12, 12, 70, 1), rgba(0, 0, 0, 0));
+            text-align: center;
         }
 
         #top-bar a {
@@ -76,6 +77,18 @@
         #top-bar a:hover {
             opacity: 10%;
             font-size: 3.2vh;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            .left,
+            .right {
+                float: none;
+            }
+
+            .left {
+                margin-bottom: 1vh;
+            }
         }
 
         #section-1 {
