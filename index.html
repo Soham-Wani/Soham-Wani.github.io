@@ -23,8 +23,6 @@
             background: #ffffff;
         }
 
-        * {}
-
         body {
             overflow-x: hidden;
             background-color: white;
@@ -455,6 +453,7 @@
             document.querySelector("#section-1").style.display = "flex";
             document.querySelector("#top-bar").style.display = "none";
             document.querySelector("#bottom-bar").style.display = "none";
+            document.querySelector("body").style.cursor = "none";
         }
         function inactivemessage() {
             document.querySelector("#section-1>h2:nth-child(1)").innerHTML = "<span>Wow, you are still here?</span><br>It's been over 5 minutes you are staring at this site :)";
